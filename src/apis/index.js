@@ -32,13 +32,11 @@ class API {
   async getVKey() {
     let VKey
     if (!sessionStorage['VKey']) {
-      let now = Date.now()
       let data = await this.request('/fm_vkey/GetVkey', {
         'g_tk': this.G_TK,
         'guid': 10000,
         'inCharset': 'utf-8',
-        'outCharset': 'utf-8',
-        '_': now
+        'outCharset': 'utf-8'
       })
       VKey = data.data.vkey
     } else {
@@ -70,7 +68,6 @@ class API {
   }
 
   async getAlbum(categoryId, index = 0, pageSize = 20) {
-    let now = Date.now()
     let offset = index * pageSize
 
     let result = this.request('/category_detail/GetAlbumListByCategory', {
@@ -80,8 +77,7 @@ class API {
       'commonInfo.cookie': `offset=${offset}&pagesize=${pageSize}`,
       'categoryId': categoryId,
       'inCharset': 'utf-8',
-      'outCharset': 'utf-8',
-      '_': now
+      'outCharset': 'utf-8'
     }).then(data => {
       let albumInfoList = data.data.albumInfoList
       let albumList = albumInfoList.map(albumInfo => {
@@ -140,14 +136,12 @@ class API {
 
   async getShow(albumId, vecIdArray) {
     if (!vecIdArray) return
-    let now = Date.now()
     let params = {
       'g_tk': this.G_TK,
       'albumid': albumId,
       'pageType': 1,
       'inCharset': 'utf-8',
-      'outCharset': 'utf-8',
-      '_': now
+      'outCharset': 'utf-8'
     }
     vecIdArray.forEach((show, index) => {
       params[`vecId._Array${index}`] = show
