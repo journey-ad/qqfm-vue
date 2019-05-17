@@ -67,6 +67,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "assets/style/variable.scss";
 .album-list {
   display: flex;
   flex-direction: column;

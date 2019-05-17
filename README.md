@@ -1,6 +1,13 @@
 # Vue 制作的 QQFM 播放器
 
-[DEMO](https://journey-ad.github.io/qqfm-vue)
+[DEMO](https://journey-ad.github.io/qqfm-vue)（非实时代码）
+
+![qrcode](https://api.imjad.cn/qrcode/?text=https%3A%2F%2Fjourney-ad.github.io%2Fqqfm-vue&size=200&level=H)
+
+## 开发中
+界面和功能参考[企鹅 FM](https://fm.qq.com) 网页端 & Android 版本 APP
+
+由于是边学边做的项目，某些方法或技术可能不是最优解或业内通行做法；一些相似的组件和功能可能会换用不同的方法实现；项目目录内可能遗留临时或无效文件
 
 ## 技术栈
 - Vue.js
@@ -8,6 +15,7 @@
 - vuex
 - vue-router
 - vant
+- better-scroll
 - axios
 - fetch-jsonp
 - lodash

@@ -1,0 +1,17 @@
+@import "./variable.scss";
+
+html,
+body {
+  font-family: 'PingFang SC', 'STHeitiSC-Light', 'Helvetica-Light', arial, sans-serif, 'Droid Sans Fallback';
+  line-height: 1;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  color: $color-text;
+  background-color: $color-background;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}

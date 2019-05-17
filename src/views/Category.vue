@@ -1,47 +1,33 @@
 <template>
-  <div class="category">
-    <Header :title="this.$route.query.type"></Header>
-    <AlbumList @loadAlbumList="loadAlbumList"></AlbumList>
+  <div class="category-list">
+    <Left @goAnchor="goAnchor"></Left>
+    <Right ref="right"></Right>
   </div>
 </template>
 
 <script>
-import AlbumList from "../components/AlbumList";
-import Header from "../components/Header";
-import apis from "../apis/index.js";
-import { mapState } from "vuex";
+import Left from "../components/Category/Left";
+import Right from "../components/Category/Right";
 export default {
   data() {
-    return {
-      type: ""
-    };
+    return {};
   },
   methods: {
-    getAlbumList(id, index) {
-      let that = this;
-      apis.getAlbum(id, index).then(result => {
-        result.list = that.$store.state.albumList.list.concat(result.list);
-        that.$store.dispatch("setAlbumList", result);
-      });
-    },
-    loadAlbumList(index) {
-      console.log(index);
-      this.getAlbumList(this.$route.query.id, index);
+    goAnchor(id){
+      this.$refs.right.goAnchor(id)
     }
   },
-  mounted() {
-    this.$store.dispatch("setAlbumList", { list: [], total: 0 });
-    this.$store.dispatch("setAlbumIndex", 0);
-  },
   components: {
-    AlbumList,
-    Header
+    Left,
+    Right
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.category {
-  margin-bottom: $radio-height;
+@import "assets/style/variable.scss";
+.category-list {
+  display: flex;
+  height: calc(100vh - #{$radio-height});
 }
 </style>

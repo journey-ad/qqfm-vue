@@ -1,7 +1,6 @@
 const axios = require('axios')
 const jsonp = require('fetch-jsonp')
 const queryString = require('query-string')
-const category = require('./category.json')
 
 class API {
   constructor() {
@@ -13,7 +12,7 @@ class API {
     // this.getShowIdList('rd000IfaGS2cLpeo')
   }
 
-  async request(path, params) {
+  async request1(path, params) {
     const url = `${this.BASE + path}?${queryString.stringify(params)}`
     let data = await jsonp(url, {
       jsonpCallbackFunction: 'qqfm'
@@ -29,14 +28,32 @@ class API {
     return data
   }
 
-  async getVKey() {
+  request(path, params) {
+    const url = `${this.BASE + path}?${queryString.stringify(params)}`
+    return new Promise((resolve, reject) => {
+      jsonp(url, {
+        jsonpCallbackFunction: 'qqfm'
+      })
+        .then(function (response) {
+          return response.json()
+        }).then(function (data) {
+          resolve(data)
+        }).catch(function (ex) {
+          reject(ex)
+        })
+    })
+  }
+
+  getVKey() {
     let VKey
     if (!sessionStorage['VKey']) {
-      let data = await this.request('/fm_vkey/GetVkey', {
+      let data = this.request('/fm_vkey/GetVkey', {
         'g_tk': this.G_TK,
         'guid': 10000,
         'inCharset': 'utf-8',
         'outCharset': 'utf-8'
+      }).then(data => {
+        return data
       })
       VKey = data.data.vkey
     } else {
@@ -51,6 +68,7 @@ class API {
   }
 
   getCategory(id) {
+    const category = require('./category.json')
     if (id) {
       return category.filter(a => {
         return a.id === id
@@ -60,6 +78,11 @@ class API {
     }
   }
 
+  getRecommend() {
+    const recommend = require('./recommend.json')
+    return recommend
+  }
+
   handleAudioUrl(urls) {
     for (let k in urls) {
       urls[k].url = `${urls[k].url}&vkey=${this.VKey}&guid=10000`
@@ -67,7 +90,7 @@ class API {
     return urls
   }
 
-  async getAlbum(categoryId, index = 0, pageSize = 20) {
+  getAlbum(categoryId, index = 0, pageSize = 20) {
     let offset = index * pageSize
 
     let result = this.request('/category_detail/GetAlbumListByCategory', {
@@ -117,7 +140,7 @@ class API {
     return result
   }
 
-  async getShowIdList(albumId) {
+  getShowIdList(albumId) {
     let result
     if (!localStorage[`showIdList_${albumId}`]) {
       result = axios.get('https://api.imjad.cn/qqfm/v1/', { // 由于跨域限制，此处只能使用第三方代理请求
@@ -134,7 +157,7 @@ class API {
     return result
   }
 
-  async getShow(albumId, vecIdArray) {
+  getShow(albumId, vecIdArray) {
     if (!vecIdArray) return
     let params = {
       'g_tk': this.G_TK,

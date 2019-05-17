@@ -5,7 +5,7 @@
         <span class="type" :data-type="cats.id">{{cats.type}}</span>
         <ul class="list">
           <router-link
-            :to="{ name: 'category', query: { id: cat.id , type: cat.name } }"
+            :to="{ name: 'subCategory', query: { id: cat.id , type: cat.name } }"
             tag="li"
             v-for="cat in cats.list"
             :key="cat.id"
