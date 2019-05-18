@@ -32,6 +32,7 @@ export default {
     this.type = this.$route.params.type;
     this.$store.dispatch("setAlbumList", { list: [], total: 0 });
     this.$store.dispatch("setAlbumIndex", 0);
+    this.loadAlbumList();
   },
   components: {
     AlbumList,

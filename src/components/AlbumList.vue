@@ -5,6 +5,7 @@
     :finished="finished"
     finished-text="没有更多了"
     @load="onLoad"
+    v-if="albumList.list.length"
   >
     <router-link
       :to="{name: 'album', params: { id: album.id }}"
@@ -28,9 +29,11 @@
       </div>
     </router-link>
   </van-list>
+  <loading msg="加载中..." v-else></loading>
 </template>
 
 <script>
+import Loading from "base/loading/loading";
 import Vue from "vue";
 import { Lazyload } from "vant";
 Vue.use(Lazyload, {
@@ -66,6 +69,9 @@ export default {
       return moment.unix(date).format("YYYY-MM-DD");
     }
   },
+  components: {
+    Loading
+  },
   mounted() {
     // this.getAlbumList()
   }
@@ -91,7 +97,7 @@ export default {
 
       .mask {
         position: absolute;
-        top: 55%;
+        top: 50%;
         right: 0;
         bottom: 0;
         left: 0;
@@ -108,10 +114,10 @@ export default {
       }
       .icon-play {
         position: absolute;
-        left: 6px;
-        bottom: 6px;
+        left: 8px;
+        bottom: 8px;
         color: rgba(255, 255, 255, 0.6);
-        font-size: 16px;
+        font-size: 23px;
         font-weight: 600;
       }
     }

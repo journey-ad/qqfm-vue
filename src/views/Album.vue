@@ -2,12 +2,14 @@
   <div class="album">
     <Header></Header>
     <ShowList @loadShowList="loadShowList" :total="total" v-if="$store.state.showList.length"></ShowList>
+    <loading msg="加载中..." v-else></loading>
   </div>
 </template>
 
 <script>
 import ShowList from "../components/ShowList";
 import Header from "../components/Album/Header";
+import Loading from "base/loading/loading";
 import apis from "../apis/index.js";
 import _ from "lodash";
 export default {
@@ -53,7 +55,8 @@ export default {
   },
   components: {
     ShowList,
-    Header
+    Header,
+    Loading
   }
 };
 </script>

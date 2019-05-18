@@ -216,6 +216,7 @@ export default {
 .slide {
   position: relative;
   min-height: 1px;
+  overflow: hidden;
   .slide-group {
     position: relative;
     overflow: hidden;
