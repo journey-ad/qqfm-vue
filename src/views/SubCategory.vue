@@ -1,6 +1,6 @@
 <template>
   <div class="category">
-    <Header :title="this.$route.params.type"></Header>
+    <Header :title="type"></Header>
     <AlbumList @loadAlbumList="loadAlbumList"></AlbumList>
   </div>
 </template>
@@ -29,6 +29,7 @@ export default {
     }
   },
   mounted() {
+    this.type = this.$route.params.type;
     this.$store.dispatch("setAlbumList", { list: [], total: 0 });
     this.$store.dispatch("setAlbumIndex", 0);
   },

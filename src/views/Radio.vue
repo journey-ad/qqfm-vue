@@ -27,6 +27,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "assets/style/variable.scss";
 .radio {
   position: fixed;
   top: 0;
@@ -34,5 +35,6 @@ export default {
   bottom: 0;
   left: 0;
   z-index: 9999;
+  background: $color-background;
 }
 </style>

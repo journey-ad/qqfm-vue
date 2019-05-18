@@ -10,6 +10,7 @@ class API {
       'inCharset': 'utf-8',
       'outCharset': 'utf-8'
     }
+    this.getVKey()
   }
 
   request(path, params) {
@@ -36,12 +37,11 @@ class API {
         'guid': 10000
       })
 
-      let data = this.request('/fm_vkey/GetVkey', params).then(data => {
+      this.request('/fm_vkey/GetVkey', params).then(data => {
+        VKey = data.data.vkey
+        sessionStorage['VKey'] = VKey
         return data
       })
-
-      VKey = data.data.vkey
-      sessionStorage['VKey'] = VKey
 
     } else {
       VKey = sessionStorage['VKey']
@@ -138,37 +138,47 @@ class API {
   }
 
   getShow(albumId, vecIdArray) {
-    if (!vecIdArray) return
+    return new Promise((resolve, reject) => {
+      if (!vecIdArray) reject('no vecIdArray')
 
-    const params = Object.assign({},this.commonParams,{
-      'albumid': albumId,
-      'pageType': 1
-    })
-    
-    vecIdArray.forEach((show, index) => {
-      params[`vecId._Array${index}`] = show
-    })
-    
-    let result = this.request('/luobo_show/GetSkipShow', params).then(data => {
-      let showList = data.data.showList
-      let result = []
-      for (let k in showList) {
-        let showInfo = showList[k]
-        result.push({
-          id: showInfo.show.showID,
-          name: showInfo.show.name,
-          album: showInfo.album.name,
-          desc: showInfo.show.desc,
-          cover: showInfo.show.cover.urls[0].url,
-          audioUrl: this.handleAudioUrl(showInfo.show.audioURL.urls),
-          upload: showInfo.show.createTime,
-          duration: showInfo.show.duration
-        })
-      }
-      return result
+      const params = Object.assign({}, this.commonParams, {
+        'albumid': albumId,
+        'pageType': 1
+      })
+
+      vecIdArray.forEach((show, index) => {
+        params[`vecId._Array${index}`] = show
+      })
+
+      this.request('/luobo_show/GetSkipShow', params).then(data => {
+        let showList = data.data.showList
+        let result = []
+        for (let k in showList) {
+          let showInfo = showList[k]
+          result.push({
+            id: showInfo.show.showID,
+            name: showInfo.show.name,
+            album: showInfo.album.name,
+            desc: showInfo.show.desc,
+            cover: showInfo.show.cover.urls[0].url,
+            audioUrl: this.handleAudioUrl(showInfo.show.audioURL.urls),
+            upload: showInfo.show.createTime,
+            duration: showInfo.show.duration
+          })
+        }
+        
+        resolve(result)
+
+      }).catch(ex => {
+        reject(ex)
+      })
     })
 
-    return result
+
+
+
+
+
   }
 }
 

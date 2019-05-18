@@ -1,7 +1,7 @@
 <template>
   <div class="album">
     <Header></Header>
-    <ShowList @loadShowList="loadShowList" :total="total" v-if="$store.state.showList"></ShowList>
+    <ShowList @loadShowList="loadShowList" :total="total" v-if="$store.state.showList.length"></ShowList>
   </div>
 </template>
 
@@ -22,7 +22,7 @@ export default {
       let that = this;
 
       let list = await apis.getShowIdList(id);
-      console.log(list);
+      // console.log(list);
       if (Array.isArray(list)) {
         localStorage[`showIdList_${id}`] = JSON.stringify(list);
 
@@ -33,11 +33,12 @@ export default {
           that.$store.dispatch("setShowList", data);
         });
       } else {
-        this.$router.back();
+        // this.$router.go(-1);
         this.$toast.fail({
           message: `${list.msg}(${list.code})`,
           position: "bottom"
         });
+        this.$router.go(-1);
       }
     },
     loadShowList(index = 0) {

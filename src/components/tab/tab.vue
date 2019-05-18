@@ -13,7 +13,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import "@/assets/style/variable.scss";
+@import "assets/style/variable.scss";
 .tab {
   position: fixed;
   display: flex;
@@ -22,6 +22,7 @@
   height: 44px;
   line-height: 44px;
   font-size: $font-size-medium;
+  background: $color-background;
   padding: 0 90px;
   box-sizing: border-box;
   z-index: 99;

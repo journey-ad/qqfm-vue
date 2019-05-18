@@ -23,13 +23,13 @@ export default {
     getRecommend() {
       this.recommend = apis.getRecommend();
     },
-    goAlbum(id){
+    goAlbum(id) {
       this.$router.push({
-        name: 'album',
+        name: "album",
         params: {
           id: id
         }
-      })
+      });
     }
   },
   mounted() {
@@ -43,6 +43,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "assets/style/variable.scss";
+.recommend {
+  margin-top: $header-height;
+  margin-bottom: $radio-height;
+}
 .slide .dots .dot {
   display: inline-block;
   width: 4px;

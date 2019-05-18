@@ -43,7 +43,8 @@ export default {
       return moment.unix(date).format("YYYY年YY月DD日");
     }
   },
-  mounted() {
+  activated() {
+    this.albumInfo = {};
     this.getAlbumInfo(this.$route.params.id);
   }
 };

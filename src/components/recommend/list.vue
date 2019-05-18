@@ -1,7 +1,7 @@
 <template>
   <ul class="radio-list">
     <li class="item bBor" v-for="(item,index) in data" :key="index" @click="goAlbum(item.albumId)">
-      <div class="pic" :style="{backgroundImage: `url(${item.cover};)`}">
+      <div class="pic" v-lazy:background-image="item.cover">
         <div class="mask"></div>
         <i class="iconfont icon-play"></i>
       </div>
@@ -17,6 +17,12 @@
 </template>
 
 <script>
+import Vue from "vue";
+import { Lazyload } from "vant";
+Vue.use(Lazyload, {
+  loading: require("assets/radio.svg"),
+  error: require("assets/radio.svg")
+});
 export default {
   props: ["data"],
   methods: {

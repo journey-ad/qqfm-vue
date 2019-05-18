@@ -15,7 +15,7 @@
     >
       <div class="cover">
         <div class="mask"></div>
-        <img :src="album.cover" :alt="album.name">
+        <img :alt="album.name" v-lazy="album.cover">
         <i class="iconfont icon-play"></i>
       </div>
       <div class="info">
@@ -31,6 +31,12 @@
 </template>
 
 <script>
+import Vue from "vue";
+import { Lazyload } from "vant";
+Vue.use(Lazyload, {
+  loading: require("assets/radio.svg"),
+  error: require("assets/radio.svg")
+});
 import _ from "lodash";
 import moment from "moment";
 import { mapState } from "vuex";
