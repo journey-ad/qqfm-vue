@@ -44,7 +44,7 @@ export default {
     }
   },
   mounted() {
-    this.getAlbumInfo(this.$route.query.id);
+    this.getAlbumInfo(this.$route.params.id);
   }
 };
 </script>

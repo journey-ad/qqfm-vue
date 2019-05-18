@@ -1,6 +1,6 @@
 <template>
   <ul class="radio-list">
-    <li class="item bBor" v-for="(item,index) in data" :key="index">
+    <li class="item bBor" v-for="(item,index) in data" :key="index" @click="goAlbum(item.albumId)">
       <div class="pic" :style="{backgroundImage: `url(${item.cover};)`}">
         <div class="mask"></div>
         <i class="iconfont icon-play"></i>
@@ -18,7 +18,17 @@
 
 <script>
 export default {
-  props: ["data"]
+  props: ["data"],
+  methods: {
+    goAlbum(id){
+      this.$router.push({
+        name: 'album',
+        params: {
+          id: id
+        }
+      })
+    }
+  }
 };
 </script>
 

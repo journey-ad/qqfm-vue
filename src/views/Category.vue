@@ -2,6 +2,7 @@
   <div class="category-list">
     <Left @goAnchor="goAnchor"></Left>
     <Right ref="right"></Right>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -13,8 +14,8 @@ export default {
     return {};
   },
   methods: {
-    goAnchor(id){
-      this.$refs.right.goAnchor(id)
+    goAnchor(id) {
+      this.$refs.right.goAnchor(id);
     }
   },
   components: {

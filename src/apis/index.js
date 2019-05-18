@@ -5,27 +5,11 @@ const queryString = require('query-string')
 class API {
   constructor() {
     this.BASE = 'https://fm.qq.com/webapp/jsonp'
-    this.G_TK = ''
-    this.COOKIE = 'pgv_pvid=8948852633;pgv_info=ssid=s267667616;'
-    this.getVKey()
-
-    // this.getShowIdList('rd000IfaGS2cLpeo')
-  }
-
-  async request1(path, params) {
-    const url = `${this.BASE + path}?${queryString.stringify(params)}`
-    let data = await jsonp(url, {
-      jsonpCallbackFunction: 'qqfm'
-    })
-      .then(function (response) {
-        return response.json()
-      }).then(function (data) {
-        return data
-      }).catch(function (ex) {
-        console.log('parsing failed', ex)
-      })
-
-    return data
+    this.commonParams = {
+      'g_tk': '',
+      'inCharset': 'utf-8',
+      'outCharset': 'utf-8'
+    }
   }
 
   request(path, params) {
@@ -46,23 +30,22 @@ class API {
 
   getVKey() {
     let VKey
+
     if (!sessionStorage['VKey']) {
-      let data = this.request('/fm_vkey/GetVkey', {
-        'g_tk': this.G_TK,
-        'guid': 10000,
-        'inCharset': 'utf-8',
-        'outCharset': 'utf-8'
-      }).then(data => {
+      const params = Object.assign({}, this.commonParams, {
+        'guid': 10000
+      })
+
+      let data = this.request('/fm_vkey/GetVkey', params).then(data => {
         return data
       })
+
       VKey = data.data.vkey
+      sessionStorage['VKey'] = VKey
+
     } else {
       VKey = sessionStorage['VKey']
     }
-    this.VKey = VKey
-    sessionStorage['VKey'] = VKey
-
-    console.log(VKey)
 
     return VKey
   }
@@ -84,24 +67,23 @@ class API {
   }
 
   handleAudioUrl(urls) {
+    let VKey = this.getVKey()
     for (let k in urls) {
-      urls[k].url = `${urls[k].url}&vkey=${this.VKey}&guid=10000`
+      urls[k].url = `${urls[k].url}&vkey=${VKey}&guid=10000`
     }
     return urls
   }
 
   getAlbum(categoryId, index = 0, pageSize = 20) {
-    let offset = index * pageSize
-
-    let result = this.request('/category_detail/GetAlbumListByCategory', {
-      'g_tk': this.G_TK,
+    const offset = index * pageSize
+    const params = Object.assign({}, this.commonParams, {
       'type': 1,
       'pageType': 1,
       'commonInfo.cookie': `offset=${offset}&pagesize=${pageSize}`,
-      'categoryId': categoryId,
-      'inCharset': 'utf-8',
-      'outCharset': 'utf-8'
-    }).then(data => {
+      'categoryId': categoryId
+    })
+
+    let result = this.request('/category_detail/GetAlbumListByCategory', params).then(data => {
       let albumInfoList = data.data.albumInfoList
       let albumList = albumInfoList.map(albumInfo => {
         let showList = albumInfo.allShowList.map(showInfo => {
@@ -129,14 +111,12 @@ class API {
         }
       })
 
-      let result = {
+      return {
         list: albumList,
         total: data.data.total
       }
-      return result
     })
 
-    console.log(result)
     return result
   }
 
@@ -159,16 +139,16 @@ class API {
 
   getShow(albumId, vecIdArray) {
     if (!vecIdArray) return
-    let params = {
-      'g_tk': this.G_TK,
+
+    const params = Object.assign({},this.commonParams,{
       'albumid': albumId,
-      'pageType': 1,
-      'inCharset': 'utf-8',
-      'outCharset': 'utf-8'
-    }
+      'pageType': 1
+    })
+    
     vecIdArray.forEach((show, index) => {
       params[`vecId._Array${index}`] = show
     })
+    
     let result = this.request('/luobo_show/GetSkipShow', params).then(data => {
       let showList = data.data.showList
       let result = []

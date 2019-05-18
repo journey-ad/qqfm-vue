@@ -1,6 +1,6 @@
 <template>
   <div class="category">
-    <Header :title="this.$route.query.type"></Header>
+    <Header :title="this.$route.params.type"></Header>
     <AlbumList @loadAlbumList="loadAlbumList"></AlbumList>
   </div>
 </template>
@@ -25,7 +25,7 @@ export default {
     },
     loadAlbumList(index) {
       console.log(index);
-      this.getAlbumList(this.$route.query.id, index);
+      this.getAlbumList(this.$route.params.id, index);
     }
   },
   mounted() {
@@ -42,6 +42,14 @@ export default {
 <style lang="scss" scoped>
 @import "assets/style/variable.scss";
 .category {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+  background: $color-background;
   margin-bottom: $radio-height;
 }
 </style>

@@ -65,7 +65,7 @@ export default new Router({
       ]
     },
     {
-      path: '/album',
+      path: '/album/:id',
       name: 'album',
       component: Album
     },

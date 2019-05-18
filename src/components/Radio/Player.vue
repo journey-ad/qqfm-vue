@@ -76,6 +76,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/style/variable.scss";
 .player-wrap {
   .header {
     position: absolute;
@@ -83,8 +84,14 @@ export default {
     display: flex;
     justify-content: space-between;
     padding: 14px;
+    line-height: 1.2;
     z-index: 2;
     color: rgba(255, 255, 255, 0.86);
+  }
+
+  .meta {
+    overflow: hidden;
+    margin-right: 20px;
   }
 
   .title {
@@ -132,10 +139,13 @@ export default {
     width: 100%;
   }
 
-  i.iconfont.icon-sound.btn {
+  .icon-sound.btn {
     position: absolute;
-    right: 20px;
-    bottom: 20px;
+    right: 10px;
+    bottom: 10px;
+    color: #d5c597;
+    font-size: 28px;
+    font-weight: 600;
   }
 
   .progress-bar {
@@ -146,7 +156,7 @@ export default {
   .line {
     position: relative;
     height: 100%;
-    background: #d5bc80;
+    background: $color-player-line;
   }
 
   .point {
@@ -160,8 +170,8 @@ export default {
   .time {
     display: flex;
     justify-content: space-between;
-    font-size: 14px;
-    padding: 4px 6px;
+    font-size: 13px;
+    padding: 6px;
   }
 
   .eq {
@@ -182,7 +192,7 @@ export default {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin: 50px 0;
+    margin: 8vh 8vw;
 
     .icon-backward,
     .icon-forward {
@@ -193,13 +203,13 @@ export default {
     .icon-play,
     .icon-pause {
       font-size: 78px;
-      color: #dbc692;
+      color: $color-player-line-d;
     }
 
     .icon-prev,
     .icon-next {
       font-size: 52px;
-      color: #dbc692;
+      color: $color-player-line-d;
     }
   }
 

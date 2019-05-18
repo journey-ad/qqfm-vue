@@ -24,7 +24,7 @@
   font-size: $font-size-medium;
   padding: 0 90px;
   box-sizing: border-box;
-  z-index: 999;
+  z-index: 99;
   .item {
     flex: 1;
     text-align: center;

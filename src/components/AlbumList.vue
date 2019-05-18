@@ -7,7 +7,7 @@
     @load="onLoad"
   >
     <router-link
-      :to="{name: 'album', query: { id: album.id }}"
+      :to="{name: 'album', params: { id: album.id }}"
       tag="div"
       class="album"
       v-for="(album,index) in albumList.list"
@@ -130,6 +130,7 @@ export default {
       .msg,
       .date {
         font-size: 12px;
+        line-height: 18px;
         margin: 5px 0;
       }
     }

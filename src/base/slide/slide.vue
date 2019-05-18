@@ -212,7 +212,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/style/variable.scss";
+@import "@/assets/style/variable.scss";
 .slide {
   position: relative;
   min-height: 1px;

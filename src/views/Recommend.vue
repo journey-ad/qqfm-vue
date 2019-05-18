@@ -1,19 +1,17 @@
 <template>
   <div class="recommend">
-    <slider>
+    <slide>
       <div v-for="(item, index) in recommend.banner" :key="index">
-        <a :href="`/album/${item.albumId}`">
-          <img class="needsclick" @ load="loadImage" :src="item.img">
-        </a>
+        <img class="needsclick" @click="goAlbum(item.albumId)" :src="item.img">
       </div>
-    </slider>
+    </slide>
     <module v-for="(data, index) in recommend.recommend" :key="index" :module="data"></module>
   </div>
 </template>
 
 <script>
 import Module from "components/recommend/module";
-import Slider from "base/slider/slider";
+import Slide from "base/slide/slide";
 import apis from "apis/index";
 export default {
   data() {
@@ -24,13 +22,21 @@ export default {
   methods: {
     getRecommend() {
       this.recommend = apis.getRecommend();
+    },
+    goAlbum(id){
+      this.$router.push({
+        name: 'album',
+        params: {
+          id: id
+        }
+      })
     }
   },
   mounted() {
     this.getRecommend();
   },
   components: {
-    Slider,
+    Slide,
     Module
   }
 };

@@ -1,7 +1,7 @@
 <template>
   <div class="album">
     <Header></Header>
-    <ShowList @loadShowList="loadShowList" :total="total"></ShowList>
+    <ShowList @loadShowList="loadShowList" :total="total" v-if="$store.state.showList"></ShowList>
   </div>
 </template>
 
@@ -18,29 +18,37 @@ export default {
   },
   methods: {
     async getShowList(id, index = 0) {
+      console.log(id);
       let that = this;
 
-      let list = await apis.getShowIdList(id).then(list => {
-        return list;
-      });
-      localStorage[`showIdList_${id}`] = JSON.stringify(list);
+      let list = await apis.getShowIdList(id);
+      console.log(list);
+      if (Array.isArray(list)) {
+        localStorage[`showIdList_${id}`] = JSON.stringify(list);
 
-      this.total = list.length
-      console.log(this.total)
+        this.total = list.length;
 
-      apis.getShow(id, _.chunk(list, 15)[index]).then(data => {
-        data = that.$store.state.showList.concat(data);
-        that.$store.dispatch("setShowList", data);
-      });
+        apis.getShow(id, _.chunk(list, 15)[index]).then(data => {
+          data = that.$store.state.showList.concat(data);
+          that.$store.dispatch("setShowList", data);
+        });
+      } else {
+        this.$router.back();
+        this.$toast.fail({
+          message: `${list.msg}(${list.code})`,
+          position: "bottom"
+        });
+      }
     },
-    loadShowList(index) {
-      console.log(index);
-      this.getShowList(this.$route.query.id, index);
+    loadShowList(index = 0) {
+      this.getShowList(this.$route.params.id, index);
     }
   },
-  mounted() {
+  activated() {
+    console.log(this.$route);
     this.$store.dispatch("setShowList", []);
-    this.$store.dispatch("setShowIndex", 0);
+    this.$store.dispatch("setShowIndex", 1);
+    this.loadShowList();
   },
   components: {
     ShowList,

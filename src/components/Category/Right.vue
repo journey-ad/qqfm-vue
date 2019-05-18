@@ -1,11 +1,11 @@
 <template>
-  <div class="category-right" ref="childList" @scroll="onScroll">
+  <div class="category-right" ref="childList" @ scroll="onScroll">
     <ul class="child-category">
       <li class="child" v-for="cats in categoryList" :key="cats.id">
         <span class="type" :data-type="cats.id">{{cats.type}}</span>
         <ul class="list">
           <router-link
-            :to="{ name: 'subCategory', query: { id: cat.id , type: cat.name } }"
+            :to="{name:`subCategory`, params:{id: cat.id,type: cat.name}}"
             tag="li"
             v-for="cat in cats.list"
             :key="cat.id"
@@ -53,7 +53,7 @@ export default {
           id = element.dataset.type;
         }
       });
-      id && this.$router.replace(`/categoryList/${id}`);
+      //id && this.$router.replace(`/category/${id}`);
     }, 100)
   },
   mounted() {

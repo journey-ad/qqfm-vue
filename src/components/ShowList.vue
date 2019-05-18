@@ -48,6 +48,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/style/variable.scss";
 .show-list {
   display: flex;
   flex-direction: column;
@@ -56,11 +57,13 @@ export default {
   .show {
     display: flex;
     flex-wrap: wrap;
-    margin: 10px 30px;
+    margin: 0 10px;
+    padding: 10px 10px 6px;
+    border-bottom: 1px dashed #4c4a45;
 
     .title {
       width: 100%;
-      color: #fff;
+      color: $color-text;
       font-size: 14px;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -69,7 +72,7 @@ export default {
     }
 
     .duration {
-      font-size: 13px;
+      font-size: 12px;
     }
   }
 }
