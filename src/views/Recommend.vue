@@ -50,10 +50,10 @@ export default {
 }
 .slide .dots .dot {
   display: inline-block;
-  width: 4px;
-  height: 4px;
-  border-radius: 4px;
-  margin: 0 3px;
+  width: 7px;
+  height: 7px;
+  border-radius: 7px;
+  margin: 0 7px;
   background-color: rgba(0, 0, 0, 0.6);
   &.active {
     background-color: #e5bb63;

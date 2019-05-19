@@ -1,6 +1,7 @@
 <template>
   <div class="player-wrap">
     <div class="header">
+      <div class="iconfont icon-arrow"></div>
       <div class="meta">
         <div class="title">{{player.title}}</div>
         <div class="album">{{player.album}}</div>
@@ -82,11 +83,22 @@ export default {
     position: absolute;
     width: calc(100% - 28px);
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
-    padding: 14px;
+    padding: 0 14px;
     line-height: 1.2;
     z-index: 2;
     color: rgba(255, 255, 255, 0.86);
+  }
+
+  .icon-arrow {
+    width: 100%;
+    font-size: 38px;
+    line-height: 6px;
+    transform: scaleY(0.8);
+    margin: 10px 0;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.8);
   }
 
   .meta {
@@ -95,13 +107,13 @@ export default {
   }
 
   .title {
-    font-size: 22px;
+    font-size: $font-size-large-x;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
   .album {
-    font-size: 14px;
+    font-size: $font-size-small-x;
     margin: 6px 0;
   }
 
@@ -130,7 +142,7 @@ export default {
     position: absolute;
     top: 0;
     right: 0;
-    bottom: 75%;
+    bottom: 70%;
     left: 0;
     background-image: linear-gradient(to bottom, #00000059, #0000);
   }
@@ -149,7 +161,7 @@ export default {
   }
 
   .progress-bar {
-    height: 10px;
+    height: 12px;
     background: #2d2d2d;
   }
 
@@ -161,8 +173,8 @@ export default {
 
   .point {
     position: absolute;
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     background: #fff;
     right: 0;
   }
@@ -170,8 +182,9 @@ export default {
   .time {
     display: flex;
     justify-content: space-between;
-    font-size: 13px;
+    font-size: 12px;
     padding: 6px;
+    color: $color-text-gray;
   }
 
   .eq {
@@ -180,8 +193,8 @@ export default {
     margin: 20px 0;
 
     .btn {
-      font-size: 14px;
-      padding: 2px 6px;
+      font-size: 12px;
+      padding: 4px 8px;
       margin: 0 2px;
       border: 1px solid #777;
       border-radius: 14px;
@@ -196,19 +209,19 @@ export default {
 
     .icon-backward,
     .icon-forward {
-      font-size: 22px;
+      font-size: 20px;
       color: #777;
     }
 
     .icon-play,
     .icon-pause {
-      font-size: 78px;
+      font-size: 84px;
       color: $color-player-line-d;
     }
 
     .icon-prev,
     .icon-next {
-      font-size: 52px;
+      font-size: 41px;
       color: $color-player-line-d;
     }
   }
@@ -220,7 +233,7 @@ export default {
     display: flex;
     justify-content: space-around;
     .iconfont {
-      margin: 10px;
+      margin: 20px;
       color: #999;
       font-size: 28px;
       font-weight: 600;

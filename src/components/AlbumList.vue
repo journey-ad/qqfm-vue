@@ -130,10 +130,10 @@ export default {
 
       .title {
         color: #fff;
-        font-size: 14px;
+        font-size: $font-size-small-x;
         margin: 4px 0;
         .icon {
-          font-size: 10px;
+          font-size: 12px;
           border: 1px solid #fff;
           border-radius: 3px;
           padding: 0 1px;
@@ -141,9 +141,9 @@ export default {
       }
       .msg,
       .date {
-        font-size: 12px;
-        line-height: 18px;
-        margin: 5px 0;
+        font-size: $font-size-small-s;
+        line-height: $font-size-medium;
+        margin: 6px 0;
       }
     }
   }

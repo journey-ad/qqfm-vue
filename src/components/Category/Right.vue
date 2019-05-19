@@ -88,7 +88,7 @@ export default {
         position: relative;
         width: 33.33%;
         padding: 10px 0;
-        font-size: 14px;
+        font-size: $font-size-small-x;
         span {
           display: block;
           overflow: hidden;

@@ -51,6 +51,7 @@ export default {
 </script>
 
 <style lang="scss" scope>
+@import "assets/style/variable.scss";
 .album-header {
   display: flex;
   flex-direction: column;
@@ -79,7 +80,7 @@ export default {
   .header-left {
     height: 36px;
     line-height: 36px;
-    padding: 4px 10px;
+    padding: 6px 10px 0;
     box-sizing: border-box;
 
     .icon-return {
@@ -91,15 +92,15 @@ export default {
 
   .title {
     text-align: left;
-    font-size: 20px;
+    font-size: $font-size-large;
     padding: 10px 20px;
     .icon {
       position: relative;
-      font-size: 10px;
+      font-size: 12px;
       border: 1px solid #fff;
       border-radius: 4px;
       padding: 0 1px;
-      top: -5px;
+      top: -8px;
     }
   }
 
@@ -108,8 +109,8 @@ export default {
     overflow: hidden;
 
     .cover {
-      width: 100px;
-      height: 100px;
+      width: 110px;
+      height: 110px;
       padding-left: 14px;
 
       img {
@@ -122,13 +123,14 @@ export default {
   .text {
     flex: 1;
     padding: 0px 12px;
-    font-size: 12px;
-    line-height: 1.8em;
+    font-size: $font-size-small;
+    line-height: 1.5em;
     color: #fff;
     text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.78);
 
     .desc {
       height: 100px;
+      font-size: $font-size-small-s;
     }
   }
 }

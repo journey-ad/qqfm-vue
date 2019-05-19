@@ -58,21 +58,22 @@ export default {
     display: flex;
     flex-wrap: wrap;
     margin: 0 10px;
-    padding: 10px 10px 6px;
-    border-bottom: 1px dashed #4c4a45;
+    padding: 15px;
+    border-bottom: 1px dashed $color-showlist-line;
 
     .title {
       width: 100%;
       color: $color-text;
-      font-size: 14px;
+      font-size: $font-size-small;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      margin: 6px 0;
+      margin-bottom: 10px;
     }
 
     .duration {
-      font-size: 12px;
+      color: $color-text-gray;
+      font-size: $font-size-small-s;
     }
   }
 }

@@ -12,6 +12,7 @@
     </div>
     <div class="control">
       <div :class="playBtnClass" @click.stop="toggle"></div>
+      <div class="iconfont icon-nowplaying"></div>
     </div>
     <div class="line">
       <div class="progress" :style="{width:`${player.current / player.duration * 100}%`}"></div>
@@ -52,18 +53,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "assets/style/variable.scss";
 .radio-footer {
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 56px;
+  height: $radio-height;
   display: flex;
   justify-content: space-between;
   background: #202020;
 
   .cover {
-    width: 55px;
-    height: 55px;
+    width: $radio-height;
+    height: $radio-height;
     img {
       width: 100%;
       height: 100%;
@@ -71,23 +73,24 @@ export default {
   }
 
   .meta {
+    flex: 1;
     width: calc(100vw - 140px);
-    padding: 6px;
+    padding: 12px 6px;
   }
 
   .control {
-    width: 56px;
-    .icon-play,
-    .icon-pause {
-      padding: 8px 0;
-      font-size: 38px;
+    display: flex;
+    justify-content: space-between;
+    .iconfont {
+      padding: 16px;
+      font-size: 32px;
       font-weight: 600;
       color: #d1b674;
     }
   }
 
   .title {
-    font-size: 14px;
+    font-size: $font-size-small;
     color: #fff;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -96,7 +99,7 @@ export default {
   }
 
   .album {
-    font-size: 13px;
+    font-size: $font-size-small-s;
     color: #d1b674;
   }
 

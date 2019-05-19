@@ -23,9 +23,7 @@ export default {
   padding: 15px;
 
   .mod-title {
-    height: 16px;
-    line-height: 17px;
-    font-size: 15px;
+    font-size: $font-size-medium-x;
     overflow: hidden;
     border-left: 1px solid $color-theme;
     color: $color-text;

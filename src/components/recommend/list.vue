@@ -26,13 +26,13 @@ Vue.use(Lazyload, {
 export default {
   props: ["data"],
   methods: {
-    goAlbum(id){
+    goAlbum(id) {
       this.$router.push({
-        name: 'album',
+        name: "album",
         params: {
           id: id
         }
-      })
+      });
     }
   }
 };
@@ -45,7 +45,7 @@ export default {
     display: flex;
     padding: 15px 0;
     position: relative;
-    font-size: 13px;
+    font-size: $font-size-small-s;
 
     &:last-child {
       padding-bottom: 0;
@@ -61,10 +61,10 @@ export default {
 
     .pic {
       display: block;
-      width: 60px;
-      height: 60px;
-      min-width: 56px;
-      min-height: 56px;
+      width: 64px;
+      height: 64px;
+      min-width: 64px;
+      min-height: 64px;
       overflow: hidden;
       position: relative;
       margin-right: 10px;
@@ -88,6 +88,7 @@ export default {
         bottom: 4px;
         font-size: 16px;
         font-weight: 600;
+        color: rgba(255, 255, 255, 0.8);
       }
     }
   }
@@ -100,7 +101,7 @@ export default {
   }
 
   .title {
-    font-size: 15px;
+    font-size: $font-size-small;
     margin-bottom: 5px;
     overflow: hidden;
     text-overflow: ellipsis;

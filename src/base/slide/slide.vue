@@ -247,9 +247,9 @@ export default {
     font-size: 0;
     .dot {
       display: inline-block;
-      width: 4px;
-      height: 4px;
-      border-radius: 4px;
+      width: 7px;
+      height: 7px;
+      border-radius: 7px;
       margin: 0 3px;
       background-color: rgba(255, 255, 255, 0.6);
       &.active {

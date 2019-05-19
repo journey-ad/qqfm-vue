@@ -19,8 +19,8 @@
   display: flex;
   top: 0;
   width: 100%;
-  height: 44px;
-  line-height: 44px;
+  height: $header-height;
+  line-height: $header-height;
   font-size: $font-size-medium;
   background: $color-background;
   padding: 0 90px;
@@ -36,8 +36,21 @@
     }
     &.router-link-active {
       span {
+        position: relative;
         color: $color-theme;
-        border-bottom: 2px solid $color-theme;
+        font-size: $font-size-medium-x;
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          display: block;
+          width: 70%;
+          height: 2px;
+          border-radius: 2px;
+          background: #ffcd32;
+        }
       }
     }
   }

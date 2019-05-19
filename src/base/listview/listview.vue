@@ -1,8 +1,16 @@
 <template>
-  <scroll :data="data" class="category" ref="category">
+  <!-- <scroll :data="data" class="category" ref="category"> -->
+  <div class="category">
     <ul class="child-category">
       <li v-for="category in data" :key="category.id" class="list-category" ref="listCategory">
-        <h2 class="list-category-type">{{category.type}}</h2>
+        <router-link
+          :to="{name:`subCategory`, params:{id: category.id,type: category.type}}"
+          tag="div"
+          class="list-category-type"
+        >
+          <i class="iconfont icon-diamond"></i>
+          {{category.type}}
+        </router-link>
         <uL class="sub">
           <router-link
             :to="{name:`subCategory`, params:{id: sub.id,type: sub.name}}"
@@ -37,11 +45,12 @@
     <div v-show="!data.length" class="loading-container">
       <van-loading/>
     </div>-->
-  </scroll>
+  </div>
+  <!-- </scroll> -->
 </template>
 
 <script>
-import Scroll from "base/scroll/scroll";
+// import Scroll from "base/scroll/scroll";
 import { getData } from "assets/js/dom";
 
 const TITLE_HEIGHT = 30;
@@ -58,38 +67,43 @@ export default {
     console.log(this.data);
   },
   components: {
-    Scroll
+    // Scroll
   }
 };
 </script>
 
 <style lang="scss" scoped>
+@import "assets/style/variable.scss";
 .category {
   position: relative;
-  margin-top: 14px;
+  // margin-top: 24px;
   flex: 1;
   overflow-y: scroll;
   color: #fff;
   .child-category {
-    margin: 0 14px;
+    margin: 0 24px;
     .list-category-type {
       display: block;
       text-align: center;
-      font-size: 18px;
-      margin: 20px 0;
+      font-size: $font-size-medium-x;
+      padding: 24px 0;
+      .iconfont {
+        font-size: $font-size-medium;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.8);
+      }
     }
     .sub {
       display: flex;
       flex-wrap: wrap;
       text-align: center;
-      padding: 22px 0;
       border-radius: 5px;
       background: #292929;
       .list-category-sub {
         position: relative;
         width: 33.33%;
-        padding: 10px 0;
-        font-size: 14px;
+        padding: 18px 0;
+        font-size: $font-size-small-x;
         .name {
           display: block;
           overflow: hidden;

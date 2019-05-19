@@ -5,6 +5,7 @@ $color-highlight-background: #333;
 $color-dialog-background: #666;
 $color-theme: #ffcd32;
 $color-theme-d: rgba(255, 205, 49, 0.5);
+$color-showlist-line: #2d2d2d;
 $color-player-line: #d5bc80;
 $color-player-line-d: #dbc692;
 $color-sub-theme: #d93f30;
@@ -15,13 +16,14 @@ $color-text-l: rgba(255, 255, 255, 0.5);
 $color-text-ll: rgba(255, 255, 255, 0.8);
 
 //字体定义规范;
-$font-size-small-s: 10px;
-$font-size-small: 12px;
-$font-size-medium: 14px;
-$font-size-medium-x: 16px;
-$font-size-large: 18px;
-$font-size-large-x: 22px;
+$font-size-small-s: 14px;
+$font-size-small: 16px;
+$font-size-small-x: 18px;
+$font-size-medium: 20px;
+$font-size-medium-x: 22px;
+$font-size-large: 24px;
+$font-size-large-x: 26px;
 
 
-$header-height: 44px;
-$radio-height: 56px;
+$header-height: 60px;
+$radio-height: 70px;

@@ -42,6 +42,6 @@ export default {
 .category-list {
   display: flex;
   margin-top: $header-height;
-  height: calc(100vh - #{$header-height} - #{$radio-height});
+  margin-bottom: calc(#{$radio-height} + 20px);
 }
 </style>
