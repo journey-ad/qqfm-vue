@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { timeout } from "d3-timer";
+import { timeout, interval } from "d3-timer";
 import BScroll from "better-scroll";
 
 export default {
@@ -40,15 +40,16 @@ export default {
     }
   },
   mounted() {
-    requestAnimationFrame(() => {
+    timeout(() => {
       this._initScroll();
-    });
+    }, this.refreshDelay);
   },
   methods: {
     _initScroll() {
       if (!this.$refs.wrapper) {
-        return;
+        return false;
       }
+
       this.scroll = new BScroll(this.$refs.wrapper, {
         probeType: this.probeType,
         click: this.click
@@ -74,6 +75,8 @@ export default {
           this.$emit("beforeScroll");
         });
       }
+
+      return true;
     },
     disable() {
       this.scroll && this.scroll.disable();

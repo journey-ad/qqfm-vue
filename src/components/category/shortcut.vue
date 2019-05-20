@@ -1,53 +1,50 @@
 <template>
-  <div class="category-left">
+  <div class="category-shortcut">
     <ul @click="goAnchor">
-      <router-link
-        tag="li"
-        :to="'/categoryList/' + category.id"
-        :class="{'active': categoryID === category.id}"
+      <li
+        :class="{'active': getCategoryID === category.id}"
         :data-id="category.id"
         v-for="category in categoryList"
         :key="category.id"
-      >{{category.type}}</router-link>
+      >{{category.type}}</li>
     </ul>
   </div>
 </template>
 
 <script>
-import apis from "../../apis/index.js";
+import apis from "apis/index.js";
 export default {
   data() {
     return {
-      categoryList: []
+      // categoryList: []
     };
   },
+  computed: {
+    getCategoryID() {
+      return this.categoryID;
+    }
+  },
+  props: ["categoryList", "categoryID"],
   methods: {
-    getCategoryList() {
-      this.categoryList = apis.getCategory();
-    },
+    // getCategoryList() {
+    //   this.categoryList = apis.getCategory();
+    // },
     goAnchor(e) {
       if (e.target.tagName === "LI") {
         this.$emit("goAnchor", e.target.dataset.id);
       }
     }
   },
-  props: {
-    categoryID: {
-      type: Number,
-      default: () => {
-        return 1;
-      }
-    }
-  },
   mounted() {
-    this.getCategoryList();
-    console.log(this.categoryList);
+    // this.getCategoryList();
+    // console.log(this.categoryList);
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.category-left {
+@import "assets/style/variable.scss";
+.category-shortcut {
   width: 68px;
   text-align: left;
   ul {
@@ -60,7 +57,7 @@ export default {
       position: relative;
       font-size: 13px;
       padding: 18px 5px;
-      &.router-link-active {
+      &.active {
         color: #d1b675;
         &::before {
           content: "";

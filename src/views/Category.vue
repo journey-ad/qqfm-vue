@@ -1,38 +1,52 @@
 <template>
   <div class="category-list">
-    <!-- <Left @goAnchor="goAnchor"></Left> -->
-    <!-- <Right ref="right"></Right> -->
-    <list-view :data="category"></list-view>
+    <Shortcut :categoryList="categoryList" :categoryID="categoryID" @goAnchor="goAnchor"></Shortcut>
+    <Category
+      :categoryList="categoryList"
+      :categoryID="categoryID"
+      @setCategoryIndex="setCategoryIndex"
+      ref="category"
+    ></Category>
+    <!-- <list-view :data="category"></list-view> -->
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-// import Left from "../components/Category/Left";
-// import Right from "../components/Category/Right";
-import ListView from "base/listview/listview";
+import Shortcut from "components/category/shortcut";
+import Category from "components/category/category";
+// import ListView from "components/category/listview";
 import apis from "apis/index";
 export default {
   data() {
     return {
-      category: []
+      categoryID: "39092",
+      categoryList: []
     };
   },
   methods: {
-    // goAnchor(id) {
-    //   this.$refs.right.goAnchor(id);
-    // }
-    getCategory() {
-      this.category = apis.getCategory();
+    setCategoryID(id) {
+      this.categoryID = "" + id;
+    },
+    setCategoryIndex(index) {
+      console.log(index)
+      this.setCategoryID(this.categoryList[index].id);
+    },
+    goAnchor(id) {
+      this.setCategoryID(id);
+      this.$refs.category.goAnchor(id);
+    },
+    getCategoryList() {
+      this.categoryList = apis.getCategory();
     }
   },
   mounted() {
-    this.getCategory();
+    this.getCategoryList();
   },
   components: {
-    // Left,
-    // Right
-    ListView
+    Shortcut,
+    Category
+    // ListView
   }
 };
 </script>
@@ -42,6 +56,6 @@ export default {
 .category-list {
   display: flex;
   margin-top: $header-height;
-  margin-bottom: calc(#{$radio-height} + 20px);
+  height: calc(100vh - #{$header-height} - #{$radio-height});
 }
 </style>
