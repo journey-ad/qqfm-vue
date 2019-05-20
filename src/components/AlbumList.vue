@@ -88,7 +88,7 @@ export default {
   .album {
     display: flex;
     justify-content: space-between;
-    margin: 10px;
+    margin: 5px 10px;
 
     .cover {
       position: relative;
@@ -141,9 +141,10 @@ export default {
       }
       .msg,
       .date {
-        font-size: $font-size-small-s;
+        color: $color-text-l;
+        font-size: $font-size-small;
         line-height: $font-size-medium;
-        margin: 6px 0;
+        margin: 4px 0;
       }
     }
   }

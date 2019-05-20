@@ -43,9 +43,8 @@ export default {
 .radio-list {
   .item {
     display: flex;
-    padding: 15px 0;
+    padding: 8px 0;
     position: relative;
-    font-size: $font-size-small-s;
 
     &:last-child {
       padding-bottom: 0;
@@ -61,10 +60,8 @@ export default {
 
     .pic {
       display: block;
-      width: 64px;
-      height: 64px;
-      min-width: 64px;
-      min-height: 64px;
+      width: 72px;
+      height: 72px;
       overflow: hidden;
       position: relative;
       margin-right: 10px;
@@ -101,7 +98,7 @@ export default {
   }
 
   .title {
-    font-size: $font-size-small;
+    font-size: $font-size-small-x;
     margin-bottom: 5px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -109,7 +106,8 @@ export default {
   }
 
   .info {
-    color: rgba(255, 255, 255, 0.4);
+    font-size: $font-size-small;
+    color: $color-text-l;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -117,7 +115,8 @@ export default {
   }
 
   .meta {
-    color: rgba(255, 255, 255, 0.4);
+    font-size: $font-size-small;
+    color: $color-text-l;
     display: flex;
     margin-top: 5px;
   }

@@ -57,14 +57,14 @@ export default {
   .show {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 10px;
-    padding: 15px;
+    margin: 0 16px;
+    padding-top: 20px;
     border-bottom: 1px dashed $color-showlist-line;
 
     .title {
       width: 100%;
       color: $color-text;
-      font-size: $font-size-small;
+      font-size: $font-size-small-x;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -73,7 +73,7 @@ export default {
 
     .duration {
       color: $color-text-gray;
-      font-size: $font-size-small-s;
+      font-size: $font-size-small;
     }
   }
 }

@@ -1,12 +1,12 @@
 <template>
   <header class="album-header">
     <div class="mask" :style="{background: `url(${albumInfo.cover})`}"></div>
-    <div class="header-left" @click="$router.back()">
+    <div class="header" @click="$router.back()">
       <i class="iconfont icon-return"></i>
-    </div>
-    <div class="title">
-      {{albumInfo.name}}
-      <span class="icon" v-if="albumInfo.icon">{{albumInfo.icon}}</span>
+      <div class="title">
+        {{albumInfo.name}}
+        <span class="icon" v-if="albumInfo.icon">{{albumInfo.icon}}</span>
+      </div>
     </div>
     <div class="info">
       <div class="cover">
@@ -77,30 +77,30 @@ export default {
     z-index: -1;
   }
 
-  .header-left {
+  .header {
+    display: flex;
     height: 36px;
     line-height: 36px;
-    padding: 6px 10px 0;
+    margin: 6px 10px;
     box-sizing: border-box;
 
     .icon-return {
       color: #fff;
-      font-size: 18px;
+      width: 1.2em;
       font-weight: bold;
     }
-  }
 
-  .title {
-    text-align: left;
-    font-size: $font-size-large;
-    padding: 10px 20px;
-    .icon {
-      position: relative;
-      font-size: 12px;
-      border: 1px solid #fff;
-      border-radius: 4px;
-      padding: 0 1px;
-      top: -8px;
+    .title {
+      text-align: left;
+      font-size: $font-size-medium;
+      .icon {
+        position: relative;
+        font-size: 10px;
+        border: 1px solid #fff;
+        border-radius: 4px;
+        padding: 0 1px;
+        top: -5px;
+      }
     }
   }
 
@@ -109,9 +109,9 @@ export default {
     overflow: hidden;
 
     .cover {
-      width: 110px;
-      height: 110px;
-      padding-left: 14px;
+      width: 120px;
+      height: 120px;
+      padding-left: 12px;
 
       img {
         max-width: 100%;
@@ -122,15 +122,16 @@ export default {
 
   .text {
     flex: 1;
-    padding: 0px 12px;
-    font-size: $font-size-small;
-    line-height: 1.5em;
+    padding: 0px 12px 20px;
+    font-size: $font-size-small-x;
+    line-height: 1.3em;
     color: #fff;
     text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.78);
 
     .desc {
       height: 100px;
-      font-size: $font-size-small-s;
+      margin-top: 10px;
+      font-size: $font-size-small;
     }
   }
 }

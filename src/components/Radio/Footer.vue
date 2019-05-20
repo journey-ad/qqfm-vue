@@ -74,8 +74,8 @@ export default {
 
   .meta {
     flex: 1;
-    width: calc(100vw - 140px);
-    padding: 12px 6px;
+    width: calc(100vw - 200px);
+    padding: 6px;
   }
 
   .control {
@@ -90,7 +90,7 @@ export default {
   }
 
   .title {
-    font-size: $font-size-small;
+    font-size: $font-size-small-x;
     color: #fff;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -99,7 +99,7 @@ export default {
   }
 
   .album {
-    font-size: $font-size-small-s;
+    font-size: $font-size-small;
     color: #d1b674;
   }
 

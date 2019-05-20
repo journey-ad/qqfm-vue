@@ -21,7 +21,7 @@
   width: 100%;
   height: $header-height;
   line-height: $header-height;
-  font-size: $font-size-medium;
+  font-size: $font-size-small-x;
   background: $color-background;
   padding: 0 90px;
   box-sizing: border-box;
@@ -30,7 +30,6 @@
     flex: 1;
     text-align: center;
     span {
-      font-weight: 600;
       padding-bottom: 2px;
       color: $color-text-l;
     }
@@ -38,7 +37,8 @@
       span {
         position: relative;
         color: $color-theme;
-        font-size: $font-size-medium-x;
+        font-size: $font-size-medium;
+        font-weight: 600;
         &::after {
           content: "";
           position: absolute;

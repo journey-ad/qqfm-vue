@@ -78,7 +78,6 @@ export default {
   position: relative;
   // margin-top: 24px;
   flex: 1;
-  overflow-y: scroll;
   color: #fff;
   .child-category {
     margin: 0 24px;

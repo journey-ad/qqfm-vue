@@ -40,7 +40,7 @@ export default {
   .header-center {
     width: 80%;
     height: 100%;
-    font-size: 16px;
+    font-size: $font-size-medium;
     font-weight: bold;
   }
   .header-right {

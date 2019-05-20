@@ -20,10 +20,10 @@ export default {
 <style lang="scss" scoped>
 @import "assets/style/variable.scss";
 .recommend-mod {
-  padding: 15px;
+  padding: 10px 14px;
 
   .mod-title {
-    font-size: $font-size-medium-x;
+    font-size: $font-size-medium;
     overflow: hidden;
     border-left: 1px solid $color-theme;
     color: $color-text;
