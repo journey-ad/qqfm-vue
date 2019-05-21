@@ -1,0 +1,15 @@
+export const SET_SHOW = 'SET_SHOW'
+
+export const SET_PLAYING_STATE = 'SET_PLAYING_STATE'
+
+export const SET_PLAYLIST = 'SET_PLAYLIST'
+
+export const SET_SEQUENCE_LIST = 'SET_SEQUENCE_LIST'
+
+export const SET_PLAY_MODE = 'SET_PLAY_MODE'
+
+export const SET_CURRENT_INDEX = 'SET_CURRENT_INDEX'
+
+export const SET_PLAY_HISTORY = 'SET_PLAY_HISTORY'
+
+export const SET_FAV_LIST = 'SET_FAV_LIST'

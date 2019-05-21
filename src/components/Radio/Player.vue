@@ -3,16 +3,16 @@
     <div class="header">
       <div class="iconfont icon-arrow"></div>
       <div class="meta">
-        <div class="title">{{player.title}}</div>
-        <div class="album">{{player.album}}</div>
+        <div class="title">{{player.show.title}}</div>
+        <div class="album">{{player.show.album}}</div>
       </div>
       <i class="iconfont icon-device menu"></i>
     </div>
     <div class="player">
       <div class="cover">
         <img
-          :src="player.cover ? player.cover : require('../../assets/radio.svg')"
-          :alt="player.title"
+          :src="player.show.cover ? player.show.cover : require('../../assets/radio.svg')"
+          :alt="player.show.title"
         >
         <div class="mask"></div>
         <i class="iconfont icon-sound btn"></i>

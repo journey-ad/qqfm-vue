@@ -2,13 +2,13 @@
   <div class="radio-footer" @click="toRadio">
     <div class="cover">
       <img
-        :src="player.cover ? player.cover : require('../../assets/radio.svg')"
+        :src="player.show.cover ? player.show.cover : require('../../assets/radio.svg')"
         :alt="player.title"
       >
     </div>
     <div class="meta">
-      <div class="title">{{player.title}}</div>
-      <div class="album">{{player.album}}</div>
+      <div class="title">{{player.show.title}}</div>
+      <div class="album">{{player.show.album}}</div>
     </div>
     <div class="control">
       <div :class="playBtnClass" @click.stop="toggle"></div>

@@ -1,6 +1,7 @@
 const axios = require('axios')
 const jsonp = require('fetch-jsonp')
 const queryString = require('query-string')
+const { LocalStorage } = require('assets/js/storage.js')
 
 class API {
   constructor() {
@@ -122,17 +123,17 @@ class API {
 
   getShowIdList(albumId) {
     let result
-    if (!localStorage[`showIdList_${albumId}`]) {
+    if (!LocalStorage.has(`showIdList_${albumId}`)) {
       result = axios.get('https://api.imjad.cn/qqfm/v1/', { // 由于跨域限制，此处只能使用第三方代理请求
         params: {
           type: 'show',
           id: albumId
         }
       }).then(data => {
-        return data.data
+        return LocalStorage.set(`showIdList_${albumId}`, data.data)
       })
     } else {
-      result = JSON.parse(localStorage[`showIdList_${albumId}`])
+      result = LocalStorage.get(`showIdList_${albumId}`)
     }
     return result
   }
@@ -166,7 +167,7 @@ class API {
             duration: showInfo.show.duration
           })
         }
-        
+
         resolve(result)
 
       }).catch(ex => {

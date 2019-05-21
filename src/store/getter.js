@@ -5,7 +5,7 @@ export default {
     return state.player
   },
   playBtnClass(state) {
-    return !state.player.state ? 'iconfont icon-play' : 'iconfont icon-pause'
+    return !state.player.playing ? 'iconfont icon-play' : 'iconfont icon-pause'
   },
   currentTime(state) {
     let seconds = state.player.current
@@ -20,6 +20,6 @@ export default {
     return current / duration * 100
   },
   cover(state) {
-    return state.player.cover ? state.player.cover : ''
+    return state.player.show.cover ? state.player.show.cover : ''
   }
 }

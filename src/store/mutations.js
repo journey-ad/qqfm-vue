@@ -1,13 +1,16 @@
+import * as types from './types'
+
 export default {
   GETAUDIO(state, el) {
     state.audioElement = el
   },
   SENDSHOW(state, show) {
-    state.player.state = true
-    state.player.title = show.name
-    state.player.album = show.album
-    state.player.cover = show.cover
-    state.player.historyList.push(show)
+    state.player.playing = true
+    state.player.show.id = show.id
+    state.player.show.title = show.name
+    state.player.show.album = show.album
+    state.player.show.cover = show.cover
+    state.historyList.push(show)
     state.audioElement.src = show.audioUrl[0].url
   },
   GETDURATION(state) {
@@ -23,16 +26,16 @@ export default {
 
   },
   PLAY(state) {
-    state.player.state = true
+    state.player.playing = true
     state.audioElement.play()
   },
   PAUSE(state) {
-    state.player.state = false
+    state.player.playing = false
     state.audioElement.pause()
   },
   TOGGLE(state) {
-    state.player.state = !state.player.state
-    if (state.player.state) {
+    state.player.playing = !state.player.playing
+    if (state.player.playing) {
       state.audioElement.play()
     } else {
       state.audioElement.pause()

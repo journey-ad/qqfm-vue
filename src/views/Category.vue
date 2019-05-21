@@ -7,7 +7,6 @@
       @setCategoryIndex="setCategoryIndex"
       ref="category"
     ></Category>
-    <!-- <list-view :data="category"></list-view> -->
     <router-view></router-view>
   </div>
 </template>
@@ -15,7 +14,6 @@
 <script>
 import Shortcut from "components/category/shortcut";
 import Category from "components/category/category";
-// import ListView from "components/category/listview";
 import apis from "apis/index";
 export default {
   data() {
@@ -46,7 +44,6 @@ export default {
   components: {
     Shortcut,
     Category
-    // ListView
   }
 };
 </script>
