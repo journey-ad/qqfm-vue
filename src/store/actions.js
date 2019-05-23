@@ -39,6 +39,9 @@ export default {
   getDuration({ state }) {
     state.player.duration = state.audioElement.duration;
   },
+  setProgress({ commit }, time) {
+    commit('SETPROGRESS', time)
+  },
   setAlbumList({ commit }, list) {
     commit('SETALBUMLIST', list)
   },
