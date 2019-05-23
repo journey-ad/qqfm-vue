@@ -19,12 +19,6 @@ export default {
   SETPROGRESS(state, time) {
     state.audioElement.currentTime = time
   },
-  PREV(state) {
-
-  },
-  NEXT(state) {
-
-  },
   PLAY(state) {
     state.player.playing = true
     state.audioElement.play()
@@ -52,5 +46,14 @@ export default {
   },
   SETSHOWINDEX(state, index) {
     state.showIndex = index
+  },
+  SETPLAYLIST(state, list) {
+    state.player.playlist = list
+  },
+  SETSEQUENCELIST(state, list) {
+    state.player.sequencelist = list
+  },
+  SETINDEX(state, index) {
+    state.player.index = index
   }
 }

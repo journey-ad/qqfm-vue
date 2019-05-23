@@ -6,7 +6,12 @@
     finished-text="没有更多了"
     @load="onLoad"
   >
-    <div class="show" v-for="show in showList" :key="show.id" @click="play(show)">
+    <div
+      class="show"
+      v-for="(show, index) in showList"
+      :key="show.id"
+      @click="play(showList, index)"
+    >
       <div class="title">{{show.name}}</div>
       <div class="duration">时长{{formatTime(show.duration)}}</div>
     </div>
@@ -37,8 +42,8 @@ export default {
       this.loading = false;
       console.log(this.showList.length, this.total);
     }, 1000),
-    play(show) {
-      this.$store.dispatch("sendShow", show);
+    play(list, index) {
+      this.$store.dispatch("play", { list, index });
     },
     formatTime(seconds) {
       return moment.utc(seconds * 1000).format("HH:mm:ss");

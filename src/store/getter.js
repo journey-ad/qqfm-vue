@@ -4,6 +4,15 @@ export default {
   player(state) {
     return state.player
   },
+  playlist(state) {
+    return state.playlist
+  },
+  sequencelist(state) {
+    return state.sequencelist
+  },
+  currentShow(state) {
+    return state.playlist[state.index] || {}
+  },
   playBtnClass(state) {
     return !state.player.playing ? 'iconfont icon-play' : 'iconfont icon-pause'
   },
@@ -15,8 +24,8 @@ export default {
     let seconds = state.player.duration
     return moment.utc(seconds * 1000).format('HH:mm:ss')
   },
-  progress(state){
-    let {current, duration} = state.player
+  progress(state) {
+    let { current, duration } = state.player
     return current / duration * 100
   },
   cover(state) {
