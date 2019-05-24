@@ -10,9 +10,6 @@ export default {
   sequencelist(state) {
     return state.sequencelist
   },
-  currentShow(state) {
-    return state.playlist[state.index] || {}
-  },
   playBtnClass(state) {
     return !state.player.playing ? 'iconfont icon-play' : 'iconfont icon-pause'
   },

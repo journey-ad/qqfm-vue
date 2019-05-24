@@ -55,5 +55,11 @@ export default {
   },
   SETINDEX(state, index) {
     state.player.index = index
-  }
+  },
+  SHOWPLAYLIST(state) {
+    state.player.isPlaylistShow = true;
+  },
+  HIDEPLAYLIST(state) {
+    state.player.isPlaylistShow = false;
+  },
 }

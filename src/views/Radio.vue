@@ -2,7 +2,7 @@
   <div class="radio">
     <div class="player-wrap">
       <div class="header">
-        <div class="iconfont icon-arrow"></div>
+        <div class="iconfont icon-arrow" @click="$router.back()"></div>
         <div class="meta">
           <div class="title">{{player.show.title}}</div>
           <div class="album">{{player.show.album}}</div>
@@ -43,14 +43,16 @@
         <i class="iconfont icon-fav"></i>
         <i class="iconfont icon-download"></i>
         <i class="iconfont icon-alarm"></i>
-        <i class="iconfont icon-playlist"></i>
+        <i class="iconfont icon-playlist" @click="showPlaylist"></i>
       </div>
     </div>
+    <playlist :class="{active:isPlaylistShow}"></playlist>
   </div>
 </template>
 
 <script>
 import ProgressBar from "components/Radio/progress-bar";
+import Playlist from "components/Radio/playlist";
 import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
@@ -58,9 +60,13 @@ export default {
   },
   props: {},
   methods: {
-    onProgressBarChanging(percent) {
-      
+    showPlaylist() {
+      this.$store.commit("SHOWPLAYLIST");
     },
+    hidePlaylist() {
+      this.$store.commit("HIDEPLAYLIST");
+    },
+    onProgressBarChanging(percent) {},
     onProgressBarChange(percent) {
       const currentTime = this.player.duration * percent;
       this.setProgress(currentTime);
@@ -79,15 +85,21 @@ export default {
       "setProgress"
     ])
   },
-  computed: mapGetters([
-    "playBtnClass",
-    "player",
-    "currentTime",
-    "durationTime",
-    "progress"
-  ]),
+  computed: {
+    isPlaylistShow() {
+      return this.$store.state.player.isPlaylistShow;
+    },
+    ...mapGetters([
+      "playBtnClass",
+      "player",
+      "currentTime",
+      "durationTime",
+      "progress"
+    ])
+  },
   components: {
-    ProgressBar
+    ProgressBar,
+    Playlist
   }
 };
 </script>

@@ -12,7 +12,7 @@
     </div>
     <div class="control">
       <div :class="playBtnClass" @click.stop="toggle"></div>
-      <div class="iconfont icon-nowplaying"></div>
+      <div class="iconfont icon-nowplaying" @click.stop="showPlaylist"></div>
     </div>
     <div class="line">
       <div class="progress" :style="{width:`${player.current / player.duration * 100}%`}"></div>
@@ -31,6 +31,10 @@ export default {
       this.$router.push({
         name: "radio"
       });
+    },
+    showPlaylist() {
+      this.$store.commit("SHOWPLAYLIST");
+      this.toRadio();
     },
     ...mapActions([
       "backward",

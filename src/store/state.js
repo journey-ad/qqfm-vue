@@ -18,6 +18,7 @@ export default {
     index: -1,
     playlist: [],
     sequencelist: [],
+    isPlaylistShow: false
   },
   albumList: { list: [], total: 0 },
   albumIndex: 0,

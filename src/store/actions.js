@@ -27,11 +27,16 @@ export default {
   getAudio({ commit }, el) {
     commit('GETAUDIO', el)
   },
-  play({ commit }, { list, index }) {
-    commit('SETSEQUENCELIST', list)
-    commit('SETPLAYLIST', list)
-    commit('SETINDEX', index)
-    commit('SENDSHOW', list[index])
+  play({ commit, state }, { list, index }) {
+    if (list && index) {
+      commit('SETSEQUENCELIST', list)
+      commit('SETPLAYLIST', list)
+      commit('SETINDEX', index)
+      commit('SENDSHOW', list[index])
+    } else if (index) {
+      commit('SETINDEX', index)
+      commit('SENDSHOW', state.player.playlist[index])
+    }
   },
   getCurrentTime({ state }) {
     state.player.current = state.audioElement.currentTime
