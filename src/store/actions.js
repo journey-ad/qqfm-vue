@@ -58,5 +58,8 @@ export default {
   },
   setShowIndex({ commit }, index) {
     commit('SETSHOWINDEX', index)
+  },
+  setPlaybackRate({ commit }, rate) {
+    commit('SETPLAYBACKRATE', rate)
   }
 }

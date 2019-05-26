@@ -28,7 +28,7 @@
           ></progress-bar>
           <div class="eq">
             <div class="btn quality">标准</div>
-            <div class="btn speed">语速</div>
+            <div class="btn speed" @click="showlaybackRate">语速</div>
           </div>
           <div class="control">
             <div class="iconfont btn icon-backward" @click="backward"></div>
@@ -47,16 +47,20 @@
       </div>
     </div>
     <playlist :class="{active:isPlaylistShow}"></playlist>
+    <playback-rate :isplaybackRateShow="isplaybackRateShow" @hidePlaybackRate="hidePlaybackRate"></playback-rate>
   </div>
 </template>
 
 <script>
 import ProgressBar from "components/Radio/progress-bar";
 import Playlist from "components/Radio/playlist";
+import PlaybackRate from "components/Radio/playback-rate";
 import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
-    return {};
+    return {
+      isplaybackRateShow: false
+    };
   },
   props: {},
   methods: {
@@ -65,6 +69,12 @@ export default {
     },
     hidePlaylist() {
       this.$store.commit("HIDEPLAYLIST");
+    },
+    showlaybackRate() {
+      this.isplaybackRateShow = true;
+    },
+    hidePlaybackRate() {
+      this.isplaybackRateShow = false;
     },
     onProgressBarChanging(percent) {},
     onProgressBarChange(percent) {
@@ -99,7 +109,8 @@ export default {
   },
   components: {
     ProgressBar,
-    Playlist
+    Playlist,
+    PlaybackRate
   }
 };
 </script>
@@ -112,7 +123,7 @@ export default {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 9999;
+  z-index: 999;
   background: $color-background;
 }
 

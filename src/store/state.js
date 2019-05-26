@@ -15,6 +15,7 @@ export default {
     duration: 0,
     playing: false,
     mode: playMode.sequence,
+    playbackRate: 1.0,
     index: -1,
     playlist: [],
     sequencelist: [],

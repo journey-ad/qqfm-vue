@@ -12,6 +12,7 @@ export default {
     state.player.show.cover = show.cover
     state.historyList.push(show)
     state.audioElement.src = show.audioUrl[0].url
+    state.audioElement.playbackRate = state.player.playbackRate || 1
   },
   GETDURATION(state) {
     return state.audioElement.duration
@@ -62,4 +63,8 @@ export default {
   HIDEPLAYLIST(state) {
     state.player.isPlaylistShow = false;
   },
+  SETPLAYBACKRATE(state, rate) {
+    state.player.playbackRate = rate
+    state.audioElement.playbackRate = state.player.playbackRate || 1
+  }
 }
