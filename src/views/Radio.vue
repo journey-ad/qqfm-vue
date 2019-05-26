@@ -16,7 +16,19 @@
             :alt="player.show.title"
           >
           <div class="mask"></div>
-          <i class="iconfont icon-sound btn"></i>
+          <div class="volume-bar" ref="volumeBar" v-show="volume.show">
+            <div class="line" ref="volumeLine">
+              <div
+                class="point"
+                ref="volumePoint"
+                @touchstart.prevent="volumeTouchStart"
+                @touchmove.prevent="volumeTouchMove"
+                @touchend="volumeTouchEnd"
+                :data-value="volume.value"
+              ></div>
+            </div>
+          </div>
+          <i class="btn iconfont" :class="soundBtnClass" @click="toggleVolumeBar"></i>
         </div>
         <div class="pannel">
           <progress-bar
@@ -52,6 +64,9 @@
 </template>
 
 <script>
+import Vue from "vue";
+import { Slider } from "vant";
+Vue.use(Slider);
 import ProgressBar from "components/Radio/progress-bar";
 import Playlist from "components/Radio/playlist";
 import PlaybackRate from "components/Radio/playback-rate";
@@ -59,6 +74,7 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
+      volume: { show: false, value: 1, touch: {} },
       isplaybackRateShow: false
     };
   },
@@ -84,6 +100,34 @@ export default {
         this.toggle();
       }
     },
+    volumeTouchStart(e) {
+      this.volume.touch.initiated = true;
+      this.volume.touch.startY = this.volume.touch.startY || e.touches[0].pageY;
+      this.volume.touch.height = this.$refs.volumeBar.clientHeight;
+    },
+    volumeTouchMove(e) {
+      if (!this.volume.touch.initiated) {
+        return;
+      }
+      const deltaY =
+        this.volume.touch.startY +
+        this.volume.touch.height -
+        e.touches[0].pageY;
+      if (deltaY < 0 || deltaY > this.volume.touch.height) return;
+      this._offsetVolume(deltaY);
+    },
+    volumeTouchEnd() {},
+    _offsetVolume(deltaY) {
+      let value = deltaY / this.volume.touch.height;
+      this.volume.value = (value > 0.95 ? 1 : value > 0.15 ? value : 0).toFixed(
+        2
+      );
+      this.$refs.volumeLine.style.height = `${deltaY}px`;
+      this.$store.dispatch("setVolume", "" + this.volume.value);
+    },
+    toggleVolumeBar() {
+      this.volume.show = !this.volume.show;
+    },
     ...mapActions([
       "backward",
       "prev",
@@ -96,6 +140,13 @@ export default {
     ])
   },
   computed: {
+    soundBtnClass() {
+      return this.volume.value <= 0
+        ? "icon-sound-mute"
+        : this.volume.value >= 0.7
+        ? "icon-sound"
+        : "icon-sound-half";
+    },
     isPlaylistShow() {
       return this.$store.state.player.isPlaylistShow;
     },
@@ -115,7 +166,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "assets/style/variable.scss";
 .radio {
   position: fixed;
@@ -200,11 +251,37 @@ export default {
       background-image: linear-gradient(to bottom, #00000059, #0000);
     }
 
-    .icon-sound.btn {
+    .volume-bar {
+      position: absolute;
+      right: 18px;
+      bottom: 50px;
+      width: 12px;
+      height: 80px;
+      border-radius: 0;
+      background: #ccc;
+
+      .line {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 100%;
+        max-height: 100%;
+        min-height: 12px;
+        background: $color-player-line-d;
+        .point {
+          width: 12px;
+          height: 12px;
+          background: $color-text;
+        }
+      }
+    }
+
+    .btn {
       position: absolute;
       right: 10px;
       bottom: 10px;
-      color: #d5c597;
+      color: $color-player-line;
       font-size: 28px;
       font-weight: 600;
     }
@@ -220,7 +297,7 @@ export default {
       margin: 20px 0;
 
       .btn {
-        font-size: 12px;
+        font-size: $font-size-small;
         padding: 4px 8px;
         margin: 0 2px;
         border: 1px solid #777;

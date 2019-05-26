@@ -66,5 +66,8 @@ export default {
   SETPLAYBACKRATE(state, rate) {
     state.player.playbackRate = rate
     state.audioElement.playbackRate = state.player.playbackRate || 1
+  },
+  SETVOLUME(state, volume) {
+    state.audioElement.volume = volume || 1
   }
 }

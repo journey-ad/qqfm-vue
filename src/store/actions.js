@@ -61,5 +61,8 @@ export default {
   },
   setPlaybackRate({ commit }, rate) {
     commit('SETPLAYBACKRATE', rate)
+  },
+  setVolume({ commit }, volume) {
+    commit('SETVOLUME', volume)
   }
 }
