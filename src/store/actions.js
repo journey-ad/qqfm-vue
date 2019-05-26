@@ -1,3 +1,5 @@
+import { playMode } from 'assets/js/config.js'
+
 export default {
   prev({ commit, state }) {
     let index = state.player.index - 1
@@ -36,6 +38,15 @@ export default {
     } else if (index) {
       commit('SETINDEX', index)
       commit('SENDSHOW', state.player.playlist[index])
+    }
+  },
+  end({ state, dispatch }) {
+    if (state.player.mode === playMode.loop) {
+      state.audioElement.currentTime = 0
+      state.audioElement.play()
+      state.player.playing = true
+    } else {
+      dispatch('next')
     }
   },
   getCurrentTime({ state }) {
