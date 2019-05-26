@@ -20,8 +20,8 @@
           <div class="title">{{show.name}}</div>
           <div class="meta">
             <span class="album">{{show.album}}</span>
-            <span>|</span>
-            <span class="category"></span>
+            <span class="partition">|</span>
+            <span class="category">{{show.category}}</span>
           </div>
         </li>
       </ul>
@@ -140,6 +140,10 @@ export default {
       .meta {
         color: $color-text-gray;
         font-size: $font-size-small;
+        .partition {
+          font-size: $font-size-small-s;
+          margin: 0 4px;
+        }
       }
     }
   }

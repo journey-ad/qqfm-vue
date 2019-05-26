@@ -160,6 +160,7 @@ class API {
             id: showInfo.show.showID,
             name: showInfo.show.name,
             album: showInfo.album.name,
+            category: showInfo.album.categoryName,
             desc: showInfo.show.desc,
             cover: showInfo.show.cover.urls[0].url,
             audioUrl: this.handleAudioUrl(showInfo.show.audioURL.urls),
