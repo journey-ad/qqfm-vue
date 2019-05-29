@@ -108,6 +108,7 @@ export default {
         show: false,
         activeIndex: -1,
         remaining: -1,
+        remainingTimer: -1,
         actions: [
           { name: "播放完当前节目", time: -1 },
           { name: "15分钟", time: 15 },
@@ -139,22 +140,21 @@ export default {
       this.timer.show = false;
     },
     addStopPlayTimer(time) {
-      let that = this,
-        remainingTimer = -1;
-      window.clearTimeout(this.timer.timer);
-      window.clearInterval(remainingTimer);
+      let that = this;
+      window.clearTimeout(that.timer.timer);
+      window.clearInterval(that.timer.remainingTimer);
       if (time > 0) {
         that.timer.remaining = time;
 
-        remainingTimer = window.setInterval(() => {
+        that.timer.remainingTimer = window.setInterval(() => {
           if (that.timer.remaining < 0) {
-            window.clearInterval(remainingTimer);
+            window.clearInterval(that.timer.remainingTimer);
           }
 
           that.timer.remaining--;
         }, 1000);
 
-        this.timer.timer = window.setTimeout(() => {
+        that.timer.timer = window.setTimeout(() => {
           that.timer.activeIndex = -1;
           that.pause();
         }, time * 1000);
