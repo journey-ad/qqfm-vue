@@ -9,7 +9,8 @@ export default {
       id: null,
       title: 'QQFM-Vue',
       album: 'journey-ad',
-      cover: ''
+      cover: '',
+      url: ''
     },
     current: 0,
     duration: 0,

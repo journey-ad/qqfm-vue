@@ -53,7 +53,13 @@
       </div>
       <div class="footer">
         <i class="iconfont icon-fav"></i>
-        <i class="iconfont icon-download"></i>
+        <progress-circle :radius="28" :percent="downloadPercent">
+          <i
+            class="iconfont icon-download-arrow"
+            :class="{active:downloadPercent!==0}"
+            @click="download"
+          ></i>
+        </progress-circle>
         <i class="iconfont icon-alarm" :class="{active: timer.activeIndex!==-1}" @click="showTimer"></i>
         <i class="iconfont icon-playlist" @click="showPlaylist"></i>
       </div>
@@ -90,6 +96,8 @@
 
 <script>
 import moment from "moment";
+import FileSaver from "file-saver";
+import Axios from "axios";
 import Vue from "vue";
 import { Slider, Actionsheet, Toast } from "vant";
 Vue.use(Slider);
@@ -97,6 +105,7 @@ Vue.use(Actionsheet);
 import ProgressBar from "components/Radio/progress-bar";
 import Playlist from "components/Radio/playlist";
 import PlaybackRate from "components/Radio/playback-rate";
+import ProgressCircle from "components/Radio/progress-circle";
 import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
@@ -116,7 +125,8 @@ export default {
           { name: "60分钟", time: 60 },
           { name: "90分钟", time: 90 }
         ]
-      }
+      },
+      downloadPercent: 0
     };
   },
   props: {},
@@ -212,6 +222,30 @@ export default {
     toggleVolumeBar() {
       this.volume.show = !this.volume.show;
     },
+    download() {
+      let that = this,
+        url = that.player.show.url,
+        name = `《${that.player.show.title}》`,
+        filename = `${that.player.show.album}-${that.player.show.title}.m4a`;
+      Toast(`开始下载 ${name}`);
+      Axios.get(url, {
+        responseType: "blob",
+        onDownloadProgress: e => {
+          // console.log(e);
+          that.downloadPercent = e.loaded / e.total;
+        }
+      })
+        .then(res => {
+          console.log(res);
+          that.downloadPercent = 0;
+          Toast(`${name} 下载完成`);
+          FileSaver.saveAs(res.data, filename);
+        })
+        .catch(e => {
+          that.downloadPercent = 0;
+          Toast(`${name} 下载失败\n(${e})`);
+        });
+    },
     formatTime(seconds) {
       return moment.utc(seconds * 1000).format("HH:mm:ss");
     },
@@ -249,7 +283,8 @@ export default {
   components: {
     ProgressBar,
     Playlist,
-    PlaybackRate
+    PlaybackRate,
+    ProgressCircle
   }
 };
 </script>
@@ -428,13 +463,26 @@ export default {
     bottom: 0;
     display: flex;
     justify-content: space-around;
-    .iconfont {
+    .iconfont,
+    .progress-circle {
       margin: 20px;
-      color: #999;
+      color: $color-icon-btn;
       font-size: 28px;
       font-weight: 600;
       &.active {
         color: $color-theme-radio;
+      }
+    }
+    .icon-download-arrow {
+      position: absolute;
+      top: 0;
+      left: 0;
+      margin: 0;
+      padding: 7px;
+      font-size: 15px;
+      &.active {
+        color: $color-theme-radio;
+        pointer-events: none;
       }
     }
   }

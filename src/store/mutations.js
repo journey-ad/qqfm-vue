@@ -10,6 +10,7 @@ export default {
     state.player.show.title = show.name
     state.player.show.album = show.album
     state.player.show.cover = show.cover
+    state.player.show.url = show.audioUrl[0].url
     state.historyList.push(show)
     state.audioElement.src = show.audioUrl[0].url
     state.audioElement.playbackRate = state.player.playbackRate || 1
