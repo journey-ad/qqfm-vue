@@ -18,7 +18,8 @@ class API {
     const url = `${this.BASE + path}?${queryString.stringify(params)}`
     return new Promise((resolve, reject) => {
       jsonp(url, {
-        jsonpCallbackFunction: 'qqfm'
+        jsonpCallbackFunction: 'qqfm',
+        timeout: 1000 * 30
       })
         .then(function (response) {
           return response.json()

@@ -54,19 +54,36 @@
       <div class="footer">
         <i class="iconfont icon-fav"></i>
         <i class="iconfont icon-download"></i>
-        <i class="iconfont icon-alarm"></i>
+        <i class="iconfont icon-alarm" @click="showTimer"></i>
         <i class="iconfont icon-playlist" @click="showPlaylist"></i>
       </div>
     </div>
     <playlist :class="{active:isPlaylistShow}"></playlist>
     <playback-rate :isplaybackRateShow="isplaybackRateShow" @hidePlaybackRate="hidePlaybackRate"></playback-rate>
+    <van-actionsheet
+      class="timer"
+      v-model="timer.show"
+      cancel-text="取消"
+      title="计时器"
+      @cancle="hideTimer"
+    >
+      <div
+        class="van-actionsheet__item"
+        :class="{active: index === timer.activeIndex}"
+        :data-time="action.time"
+        @click.stop="onSelect($event, index)"
+        v-for="(action,index) in timer.actions"
+        :key="index"
+      >{{action.name}}</div>
+    </van-actionsheet>
   </div>
 </template>
 
 <script>
 import Vue from "vue";
-import { Slider } from "vant";
+import { Slider, Actionsheet } from "vant";
 Vue.use(Slider);
+Vue.use(Actionsheet);
 import ProgressBar from "components/Radio/progress-bar";
 import Playlist from "components/Radio/playlist";
 import PlaybackRate from "components/Radio/playback-rate";
@@ -75,7 +92,19 @@ export default {
   data() {
     return {
       volume: { show: false, value: 1, touch: {} },
-      isplaybackRateShow: false
+      isplaybackRateShow: false,
+      timer: {
+        timer: null,
+        show: false,
+        activeIndex: -1,
+        actions: [
+          { name: "播放完当前节目", time: -1 },
+          { name: "15分钟", time: 15 },
+          { name: "30分钟", time: 30 },
+          { name: "60分钟", time: 60 },
+          { name: "90分钟", time: 90 }
+        ]
+      }
     };
   },
   props: {},
@@ -91,6 +120,16 @@ export default {
     },
     hidePlaybackRate() {
       this.isplaybackRateShow = false;
+    },
+    showTimer() {
+      this.timer.show = true;
+    },
+    hideTimer() {
+      this.timer.show = false;
+    },
+    onSelect(e, index) {
+      this.timer.activeIndex = index;
+      console.log(e.target.dataset.time, index);
     },
     onProgressBarChanging(percent) {},
     onProgressBarChange(percent) {
@@ -345,6 +384,24 @@ export default {
       color: #999;
       font-size: 28px;
       font-weight: 600;
+    }
+  }
+}
+
+.timer {
+  color: $color-text;
+  background-color: $color-background;
+  .van-hairline--top-bottom::after {
+    border-color: $color-background-d;
+  }
+  .van-actionsheet__cancel::before {
+    background-color: #1f1f1f;
+  }
+  .van-actionsheet__cancel,
+  .van-actionsheet__item {
+    background-color: $color-background;
+    &.active {
+      color: $color-theme;
     }
   }
 }
