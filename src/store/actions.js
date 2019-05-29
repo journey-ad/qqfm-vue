@@ -26,6 +26,9 @@ export default {
   toggle({ commit }) {
     commit('TOGGLE')
   },
+  pause({ commit }) {
+    commit('PAUSE')
+  },
   getAudio({ commit }, el) {
     commit('GETAUDIO', el)
   },

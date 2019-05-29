@@ -54,7 +54,7 @@
       <div class="footer">
         <i class="iconfont icon-fav"></i>
         <i class="iconfont icon-download"></i>
-        <i class="iconfont icon-alarm" @click="showTimer"></i>
+        <i class="iconfont icon-alarm" :class="{active: timer.activeIndex!==-1}" @click="showTimer"></i>
         <i class="iconfont icon-playlist" @click="showPlaylist"></i>
       </div>
     </div>
@@ -69,6 +69,15 @@
     >
       <div
         class="van-actionsheet__item"
+        data-time="0"
+        @click.stop="onSelect($event, -1)"
+        v-if="timer.activeIndex!==-1"
+      >
+        取消定时器
+        <span class="remaining" v-show="timer.remaining>0">({{formatTime(timer.remaining)}})</span>
+      </div>
+      <div
+        class="van-actionsheet__item"
         :class="{active: index === timer.activeIndex}"
         :data-time="action.time"
         @click.stop="onSelect($event, index)"
@@ -80,8 +89,9 @@
 </template>
 
 <script>
+import moment from "moment";
 import Vue from "vue";
-import { Slider, Actionsheet } from "vant";
+import { Slider, Actionsheet, Toast } from "vant";
 Vue.use(Slider);
 Vue.use(Actionsheet);
 import ProgressBar from "components/Radio/progress-bar";
@@ -97,6 +107,7 @@ export default {
         timer: null,
         show: false,
         activeIndex: -1,
+        remaining: -1,
         actions: [
           { name: "播放完当前节目", time: -1 },
           { name: "15分钟", time: 15 },
@@ -127,9 +138,43 @@ export default {
     hideTimer() {
       this.timer.show = false;
     },
+    addStopPlayTimer(time) {
+      let that = this,
+        remainingTimer = -1;
+      window.clearTimeout(this.timer.timer);
+      window.clearInterval(remainingTimer);
+      if (time > 0) {
+        that.timer.remaining = time;
+
+        remainingTimer = window.setInterval(() => {
+          if (that.timer.remaining < 0) {
+            window.clearInterval(remainingTimer);
+          }
+
+          that.timer.remaining--;
+        }, 1000);
+
+        this.timer.timer = window.setTimeout(() => {
+          that.timer.activeIndex = -1;
+          that.pause();
+        }, time * 1000);
+
+        Toast(`将在${Math.ceil(time / 60)}分钟后自动停止播放`);
+      } else if (time === 0) {
+        Toast("定时器已取消");
+      }
+    },
     onSelect(e, index) {
-      this.timer.activeIndex = index;
       console.log(e.target.dataset.time, index);
+      let time = e.target.dataset.time * 60;
+
+      if (time < 0) {
+        time = this.player.duration - this.player.current;
+      }
+
+      this.timer.activeIndex = index;
+      this.addStopPlayTimer(time);
+      this.timer.show = false;
     },
     onProgressBarChanging(percent) {},
     onProgressBarChange(percent) {
@@ -167,10 +212,14 @@ export default {
     toggleVolumeBar() {
       this.volume.show = !this.volume.show;
     },
+    formatTime(seconds) {
+      return moment.utc(seconds * 1000).format("HH:mm:ss");
+    },
     ...mapActions([
       "backward",
       "prev",
       "toggle",
+      "pause",
       "next",
       "forward",
       "getCurrentTime",
@@ -384,6 +433,9 @@ export default {
       color: #999;
       font-size: 28px;
       font-weight: 600;
+      &.active {
+        color: $color-theme-radio;
+      }
     }
   }
 }
@@ -402,6 +454,10 @@ export default {
     background-color: $color-background;
     &.active {
       color: $color-theme;
+    }
+    .remaining {
+      color: $color-text-gray;
+      font-size: $font-size-small;
     }
   }
 }
