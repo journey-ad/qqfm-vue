@@ -1,12 +1,8 @@
 # Vue 制作的 QQFM 播放器
 
-[DEMO1](https://journey-ad.github.io/qqfm-vue)（非实时代码）
+[DEMO](http://lab.getloli.com/qqfm-vue)（非实时代码）
 
-![qrcode1](https://api.imjad.cn/qrcode/?text=https%3A%2F%2Fjourney-ad.github.io%2Fqqfm-vue&size=200&level=H)
-
-[DEMO2](http://lab.getloli.com)（因为音频文件http安全问题，ghpages下载功能可能异常，故提供一个http的demo）
-
-![qrcode2](https://api.imjad.cn/qrcode/?text=http%3A%2F%2Flab.getloli.com&size=200&level=H)
+![qrcode](https://api.imjad.cn/qrcode/?text=http%3A%2F%2Flab.getloli.com%2Fqqfm-vue&size=200&level=H)
 
 ## 开发中
 界面和功能参考[企鹅 FM](https://fm.qq.com) 网页端 & Android 版本 APP
