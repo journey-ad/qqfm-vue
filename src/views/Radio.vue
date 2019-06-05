@@ -243,7 +243,11 @@ export default {
         })
         .catch(e => {
           that.downloadPercent = 0;
-          Toast(`${name} 下载失败\n(${e})`);
+          if (location.protocol === "https:") {
+            Toast(`${name} 下载失败\n请使用http协议访问并重试`);
+          } else {
+            Toast(`${name} 下载失败\n(${e})`);
+          }
         });
     },
     formatTime(seconds) {
