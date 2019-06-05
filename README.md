@@ -4,6 +4,16 @@
 
 ![qrcode](https://api.imjad.cn/qrcode/?text=http%3A%2F%2Flab.getloli.com%2Fqqfm-vue&size=200&level=H)
 
+<details>
+ <summary>建议在无痕浏览窗口中打开且使用 http 协议访问</summary>
+  
+ 由于腾讯的防盗链策略，登录过腾讯业务后会在 `.qq.com` 域上设置`skey`字段值的 Cookie
+  
+ 企鹅FM后端接口接收到此 Cookie 字段值后，将采用更严格的防盗链策略，同时验证由`skey`计算而来的`g_tk`值，造成请求失败
+ 
+ 音频资源文件协议仅支持 http，若页面为 https 协议，会造成部分浏览器下载功能异常
+</details>
+
 ## 开发中
 界面和功能参考[企鹅 FM](https://fm.qq.com) 网页端 & Android 版本 APP
 
